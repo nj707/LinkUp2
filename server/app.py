@@ -123,6 +123,10 @@ api.add_resource(FavoriteByID, "/favorites/<int:id>")
 
 
 class SignUpList(Resource):
+    def get(self):
+            return_list = [s.to_dict() for s in SignUp.query.all()]
+            return make_response(return_list, 200)
+
     def post(self):
         data = request.json
         try:
