@@ -9,6 +9,7 @@ import HomePage from "./HomePage"
 
 
 
+
 function App() {
   const xurl = "http://127.0.0.1:5555"
   const [currUser, setCurrUser] = useState("")
@@ -113,7 +114,9 @@ function App() {
         </Route>
 
         <Route exact path="/events">
-          <EventPage events={events} />
+          <EventPage currUser={currUser}
+            events={events}
+            xurl={xurl} />
         </Route>
 
         <Route exact path="/login">
@@ -128,6 +131,7 @@ function App() {
 
         <Route exact path="/profile">
           <Profile events={events}
+            loggedIn={loggedIn}
             currUser={currUser}
             setCurrentUser={setCurrentUser}
             xurl={xurl}

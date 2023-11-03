@@ -9,6 +9,7 @@ function Login({ users, currUser, loggedIn, setLogIn, setCurrentUser, xurl, addU
     };
 
     const [searchUserHold, setSearchUserHold] = useState(initValue)
+    const [validationErrors, setValidationErrors] = useState([])
     const [loginMode, setLoginMode] = useState(true)
     const history = useHistory()
     // const history = useHistory()
@@ -33,16 +34,31 @@ function Login({ users, currUser, loggedIn, setLogIn, setCurrentUser, xurl, addU
         });
     }
 
+
     function handleLoginSubmit(e) {
         e.preventDefault();
+        setValidationErrors([]); // Clear any previous validation errors
+
         const usernameCheck = users.find((user) => user.username === searchUserHold.username);
         const passwordCheck = users.find((user) => user.password === searchUserHold.password);
-        if (usernameCheck !== undefined && passwordCheck !== undefined) {
+
+        const errors = [];
+        if (usernameCheck === undefined) {
+            errors.push("Username is incorrect.");
+        }
+        if (passwordCheck === undefined) {
+            errors.push("Password is incorrect.");
+        }
+        if (errors.length > 0) {
+            setValidationErrors(errors);
+            alert("Login failed. Please correct the following errors:\n" + errors.join("\n"));
+        } else {
             setLogIn(true);
             setCurrentUser(users.find((user) => user.username === searchUserHold.username));
-            history.push("/profile")
+            history.push("/events");
         }
     }
+
 
     function handleSignupChange(e) {
         const { name, value } = e.target;

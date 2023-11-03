@@ -9,7 +9,6 @@ function NavBar() {
     return (
         <div className="nav-container">
             <p>
-
                 <Link to="/" className="nav-link">Home</Link>
             </p>
             <p>
