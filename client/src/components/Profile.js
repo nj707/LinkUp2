@@ -24,6 +24,21 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
         })
         : null
 
+    const renderSuEvents = currUser.signups !== undefined ?
+        currUser.signups.map((su) => {
+            const eventHold = events.filter((event) => event.id === su.event_id)
+            if (eventHold.length > 0) {
+                return (<EventCard
+                    key={su.event_id}
+                    event={eventHold[0]}
+                    currUser={currUser}
+                    xurl={xurl}
+                    postFavorites={postFavorites}
+                    removeFavorite={removeFavorite} />)
+            } return null
+        })
+        : null
+
 
 
     function handleClick() {
@@ -68,39 +83,35 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
         history.push('/login')
     }
 
-    // useEffect(() => {
-    //     if (currUser === '') { setShowEdit(false) } else { setShowEdit(true) }
-    // }, [currUser])
 
-    if (!currUser) {
-        return (
-            <div>
-                You must have an accout to see your profile!
-                <button onClick={() => history.push('/login')}>login</button>
+
+    return (
+        <>
+            {showForm ? <EditUser handleProf={handleProf} currUser={currUser} deleteUser={deleteUser} /> : <> </>}
+            <div className="buttonContainer">
+                <button onClick={handleClick} className="user-form-submit">User Settings</button>
             </div>
-        )
-    } else {
+            <div className="buttonContainer">
+                <button onClick={handleSignout} className="user-form-submit">Sign out</button>
+            </div>
 
-        return (
-            <>
-                {showForm ? <EditUser handleProf={handleProf} currUser={currUser} deleteUser={deleteUser} /> : <> </>}
-                <div className="buttonContainer">
-                    <button onClick={handleClick} className="user-form-submit">User Settings</button>
-                </div>
-                <div className="buttonContainer">
-                    <button onClick={handleSignout} className="user-form-submit">Sign out</button>
-                </div>
+            <div>
+                <ul className="cards">
+                    Favorites
+                    {renderFavEvents}
+                </ul>
 
-                <div>
-                    <ul className="cards">
-                        {renderFavEvents}
-                    </ul>
+                <ul className="cards">
+                    Signups
+                    {renderSuEvents}
+                </ul>
 
-                </div>
-            </>
-        )
-    }
 
+            </div>
+        </>
+    )
 }
+
+
 
 export default Profile;

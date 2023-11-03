@@ -71,14 +71,14 @@ with app.app_context():
 
     print('creating signups and favs')
     signup1 = SignUp(user_id=3 ,event_id=1)
-    fav1 = Favorite(user_id=2, event_id=1)
-    fav2 = Favorite(user_id=1, event_id=2 )
-    fav3 = Favorite(user_id=1, event_id=3 )
+    # fav1 = Favorite(user_id=2, event_id=1)
+    # fav2 = Favorite(user_id=1, event_id=2 )
+    # fav3 = Favorite(user_id=1, event_id=3 )
     
     signups = [signup1]
-    favorites = [fav1, fav2, fav3]
+    # favorites = [fav1, fav2, fav3]
     db.session.add_all(signups)
-    db.session.add_all(favorites)
+    # db.session.add_all(favorites)
     db.session.commit()
 
     print("Seeding done!")

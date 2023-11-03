@@ -15,8 +15,8 @@ function App() {
   const [currUser, setCurrUser] = useState("")
   const [events, setEvents] = useState([])
   const [users, setUsers] = useState([])
-  const [sus, setSus] = useState([])
-  const [favorites, setFavorites] = useState([])
+  // const [sus, setSus] = useState([])
+  // const [favorites, setFavorites] = useState([])
   const [loggedIn, setLoggedIn] = useState([])
 
 
@@ -51,14 +51,12 @@ function App() {
   function setLogIn(data) {
     setLoggedIn(data)
   }
-
   function setCurrentUser(data) {
     setCurrUser(data)
   }
 
-  function postFavorites(data) {
 
-    setFavorites([...favorites, data])
+  function postFavorites(data) {
     setCurrUser({
       ...currUser,
       favorites: [
@@ -80,19 +78,41 @@ function App() {
         setEvents(newEventsList)
       })
   }
-
-
-  function addUser(data) {
-    setUsers([...users, data])
-  }
-  function removeUser(data) {
-    setUsers(users.filter((user) => { if (user.id !== data.id) return user }))
-  }
-
   function removeFavorite(data) {
-    setFavorites(favorites.filter((favorite) => favorite.id !== data))
     const updatedCurrUserFavs = currUser.favorites.filter(
       (favorite) => favorite.id !== data
+    )
+    setCurrUser({
+      ...currUser,
+      favorites: updatedCurrUserFavs,
+    })
+  }
+
+  function postSignups(data) {
+    setCurrUser({
+      ...currUser,
+      signups: [
+        ...currUser.signups,
+        data,
+      ],
+    })
+    fetch(`${xurl}/events/${data.event_id}`)
+      .then(r => r.json())
+      .then(d => {
+        let newEventsList = []
+        events.map((event) => {
+          if (event.id === d.id) {
+            newEventsList.push(d)
+          } else {
+            newEventsList.push(event)
+          }
+        })
+        setEvents(newEventsList)
+      })
+  }
+  function removeSignup(data) {
+    const updatedCurrUserFavs = currUser.signups.filter(
+      (signup) => signup.id !== data
     )
     setCurrUser({
       ...currUser,
@@ -103,11 +123,30 @@ function App() {
 
 
 
+
+
+
+
+
+
+
+  function addUser(data) {
+    setUsers([...users, data])
+  }
+  function removeUser(data) {
+    setUsers(users.filter((user) => { if (user.id !== data.id) return user }))
+  }
+
+
+
+
+
+
   return (
     <div className="app">
 
       <Header />
-      <NavBar />
+      <NavBar currUser={currUser} />
       <Switch>
         <Route exact path="/">
           <HomePage events={events} />
@@ -116,7 +155,11 @@ function App() {
         <Route exact path="/events">
           <EventPage currUser={currUser}
             events={events}
-            xurl={xurl} />
+            xurl={xurl}
+            postFavorites={postFavorites}
+            removeFavorite={removeFavorite}
+            postSignups={postSignups}
+            removeSignup={removeSignup} />
         </Route>
 
         <Route exact path="/login">
@@ -137,7 +180,9 @@ function App() {
             xurl={xurl}
             removeUser={removeUser}
             postFavorites={postFavorites}
-            removeFavorite={removeFavorite} />
+            removeFavorite={removeFavorite}
+            postSignups={postSignups}
+            removeSignup={removeSignup} />
 
         </Route>
 
