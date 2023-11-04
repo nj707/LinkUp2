@@ -25,13 +25,13 @@ function App() {
 
 
   useEffect(() => {
-    fetch(xurl + "/events")
+    fetch("/events")
       .then(r => r.json())
       .then(setEvents)
   }, [])
 
   useEffect(() => {
-    fetch(`${xurl}/users`)
+    fetch('/users')
       .then(r => r.json())
       .then(setUsers)
   }, [])
@@ -64,7 +64,7 @@ function App() {
         data,
       ],
     })
-    fetch(`${xurl}/events/${data.event_id}`)
+    fetch(`/events/${data.event_id}`)
       .then(r => r.json())
       .then(d => {
         let newEventsList = []
@@ -96,7 +96,7 @@ function App() {
         data,
       ],
     })
-    fetch(`${xurl}/events/${data.event_id}`)
+    fetch(`/events/${data.event_id}`)
       .then(r => r.json())
       .then(d => {
         let newEventsList = []
@@ -111,12 +111,12 @@ function App() {
       })
   }
   function removeSignup(data) {
-    const updatedCurrUserFavs = currUser.signups.filter(
+    const updatedCurrUserSus = currUser.signups.filter(
       (signup) => signup.id !== data
     )
     setCurrUser({
       ...currUser,
-      favorites: updatedCurrUserFavs,
+      signups: updatedCurrUserSus,
     })
   }
 

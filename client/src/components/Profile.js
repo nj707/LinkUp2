@@ -3,7 +3,7 @@ import EditUser from './EditUser';
 import EventCard from './EventCard';
 import { useHistory } from "react-router-dom";
 
-function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, }) {
+function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, postSignups, removeSignup }) {
     const history = useHistory()
     const [showForm, setShowForm] = useState(false)
 
@@ -19,7 +19,8 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     currUser={currUser}
                     xurl={xurl}
                     postFavorites={postFavorites}
-                    removeFavorite={removeFavorite} />)
+                    removeFavorite={removeFavorite}
+                />)
             } return null
         })
         : null
@@ -34,7 +35,9 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     currUser={currUser}
                     xurl={xurl}
                     postFavorites={postFavorites}
-                    removeFavorite={removeFavorite} />)
+                    removeFavorite={removeFavorite}
+                    postSignups={postSignups}
+                    removeSignup={removeSignup} />)
             } return null
         })
         : null
@@ -46,7 +49,7 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
     }
 
     const handleProf = (updProf) => {
-        fetch(xurl + '/users/' + currUser.id, {
+        fetch(`/users/${currUser.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -65,7 +68,7 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
     }
 
     const deleteUser = () => {
-        fetch(xurl + '/users/' + currUser.id, {
+        fetch(`/users/${currUser.id}`, {
             method: "DELETE",
         })
             .then(r => {

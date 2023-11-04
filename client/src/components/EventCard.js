@@ -106,7 +106,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
         if (id) {
             if (isAdded) {
                 const fav_hold = currUser.favorites.find((favorite) => favorite.event_id === id);
-                fetch(`${xurl}/favorites/${fav_hold.id}`, { method: "DELETE" })
+                fetch(`/favorites/${fav_hold.id}`, { method: "DELETE" })
                     .then((response) => {
                         if (response.ok) {
                             removeFavorite(fav_hold.id);
@@ -118,7 +118,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                     user_id: currUser.id,
                     event_id: id,
                 };
-                fetch(`${xurl}/favorites`, {
+                fetch('/favorites', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
@@ -142,7 +142,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
         if (id) {
             if (isSu) {
                 const su_hold = currUser.signups.find((signup) => signup.event_id === id);
-                fetch(`${xurl}/signups/${su_hold.id}`, { method: "DELETE" })
+                fetch(`/signups/${su_hold.id}`, { method: "DELETE" })
                     .then((response) => {
                         if (response.ok) {
                             removeSignup(su_hold.id);
@@ -154,7 +154,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                     user_id: currUser.id,
                     event_id: id,
                 };
-                fetch(`${xurl}/signups`, {
+                fetch('/signups', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
@@ -177,34 +177,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
 
 
 
-    // function toggleSignup() {
-    //     if (isSu) {
-    //         const su_hold = currUser.signups.find((signup) => signup.event_id === id);
-    //         fetch(`${xurl}/signups/${su_hold.id}`, { method: "DELETE" })
-    //             .then((response) => {
-    //                 if (response.ok) {
-    //                     removeFavorite(fav_hold.id);
-    //                     setIsAdded(false);
-    //                 }
-    //             });
-    //     } else {
-    //         const data = {
-    //             user_id: currUser.id,
-    //             event_id: id,
-    //         };
-    //         fetch(`${xurl}/favorites`, {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify(data)
-    //         })
-    //             .then((response) => {
-    //                 if (response.ok) {
-    //                     postFavorites(data);
-    //                     setIsAdded(true);
-    //                 }
-    //             });
-    //     }
-    // }
+
 
     return (
         <div>

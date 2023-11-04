@@ -20,7 +20,7 @@ class User(db.Model, SerializerMixin):
     favorites = db.relationship("Favorite", backref = 'user', cascade = "all, delete")
     # events = db.relationship("Event", backref = 'user', cascade= "all, delete")
 
-    serialize_rules = ("-signups.user", "-favorites.user", )
+    serialize_rules = ("-signups.user", "-favorites.user", "-signups.event", )
 
     @validates("name")
     def validate_name(self, key, name):
@@ -63,7 +63,7 @@ class Event(db.Model, SerializerMixin):
     signups = db.relationship("SignUp", backref = 'event', cascade = "all, delete")
     favorites = db.relationship("Favorite", backref = 'event', cascade = "all, delete")
 
-    serialize_rules = ("-signups.event", "-favorites.event",)
+    serialize_rules = ("-signups.event", "-favorites.event", "-signups.user",)
 
     # @validates("user_id")
     # def validate_id(self, key, value):

@@ -70,7 +70,7 @@ function Login({ users, currUser, loggedIn, setLogIn, setCurrentUser, xurl, addU
 
     function handleSignupSubmit(e) {
         e.preventDefault();
-        fetch(`${xurl}/users`, {
+        fetch('/users', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(searchUserHold),
