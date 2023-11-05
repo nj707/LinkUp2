@@ -21,6 +21,16 @@ with app.app_context():
     SignUp.query.delete()
     Favorite.query.delete()
 
+    print("creating users...")
+    user1 = User(name="Nial Johnson", username="yaboinilo", profession="Musician", password="1234hi")
+    user2 = User(name = "Will Bargemann", username="chillitswill", profession="Videographer", password="cwilly")
+    user3 = User(name="Henick Baptiste", username="oh3", profession= "Musician, Videographer", password="ooo3")
+    user4 = User(name="Travis Scott", username="travis", profession="Musician, Producer", password="astro")
+    users = [user1, user2, user3, user4] 
+ 
+    db.session.add_all(users)
+    db.session.commit()
+
     print("creating events...")
     event1 = Event(
         name = "Studio Session",
@@ -29,6 +39,7 @@ with app.app_context():
         location = "The Crib",
         host = "Yaboi Nilo",
         info = "Come slide to the studio session and have fun",
+        # user_id= user1.id ,
 
     )
     event2 = Event(
@@ -38,6 +49,7 @@ with app.app_context():
         location = "Los Angeles at SoFI Stadium",
         host = "Travis Scott",
         info = "Travis Scott Live in Concert",
+        # user_id= user4.id ,
 
     )
     event3 = Event(
@@ -47,6 +59,7 @@ with app.app_context():
         location = "Oakland Arena",
         host = "Live Nation",
         info = "Travis Scott Live in Concert",
+        # user_id= user4.id ,
 
     )
     event4 = Event(
@@ -56,18 +69,14 @@ with app.app_context():
         location = "Vallejo, California",
         host = "Lets Function",
         info = "Yaboi Nilo and Oh3 Live",
+        # user_id= user3.id ,
 
     )
     events = [event1, event2, event3, event4]
-
-    print("creating users...")
-    user1 = User(name="Nial Johnson", username="yaboinilo", profession="Musician", password="1234hi")
-    user2 = User(name = "Will Bargemann", username="chillitswill", profession="Videographer", password="cwilly")
-    user3 = User(name="Henick Baptiste", username="oh3", profession= "Musician, Videographer", password="ooo3")
-    users = [user1, user2, user3]
     db.session.add_all(events)
-    db.session.add_all(users)
     db.session.commit()
+
+
 
     print('creating signups and favs')
     signup1 = SignUp(user_id=3 ,event_id=1)

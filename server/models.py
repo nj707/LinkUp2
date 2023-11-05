@@ -59,7 +59,7 @@ class Event(db.Model, SerializerMixin):
     host = db.Column(db.String)
     info = db.Column(db.String)
 
-    # user_id = db.Column(db.Integer, db.ForeignKey("users.id")) stretch
+    # user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
     signups = db.relationship("SignUp", backref = 'event', cascade = "all, delete")
     favorites = db.relationship("Favorite", backref = 'event', cascade = "all, delete")
 

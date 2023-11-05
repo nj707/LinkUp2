@@ -136,7 +136,7 @@ class SignUpList(Resource):
                 )
             db.session.add(signup)
             db.session.commit()
-            return make_response(signup.to_dict(rules=('-event.signups', '-user.signups')), 200)
+            return make_response(signup.to_dict(), 200)
         except ValueError:
             return make_response({"errors": ["validation errors"]}, 400)
 

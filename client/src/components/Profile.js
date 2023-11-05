@@ -20,6 +20,8 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     xurl={xurl}
                     postFavorites={postFavorites}
                     removeFavorite={removeFavorite}
+                    postSignups={postSignups}
+                    removeSignup={removeSignup}
                 />)
             } return null
         })

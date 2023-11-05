@@ -121,25 +121,12 @@ function App() {
   }
 
 
-
-
-
-
-
-
-
-
-
   function addUser(data) {
     setUsers([...users, data])
   }
   function removeUser(data) {
     setUsers(users.filter((user) => { if (user.id !== data.id) return user }))
   }
-
-
-
-
 
 
   return (
