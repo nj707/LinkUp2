@@ -83,7 +83,8 @@ function Login({ users, currUser, loggedIn, setLogIn, setCurrentUser, xurl, addU
                         const data = {
                             ...searchUserHold,
                             favorites: [],
-                            adoptions: [],
+                            signups: [],
+                            events: [],
                             id: Math.max(...userIds) + 1,
                         };
                         addUser(data);

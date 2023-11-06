@@ -18,9 +18,9 @@ class User(db.Model, SerializerMixin):
 
     signups = db.relationship("SignUp", backref = 'user', cascade = "all, delete")
     favorites = db.relationship("Favorite", backref = 'user', cascade = "all, delete")
-    # events = db.relationship("Event", backref = 'user', cascade= "all, delete")
+    events = db.relationship("Event", backref = 'user', cascade= "all, delete")
 
-    serialize_rules = ("-signups.user", "-favorites.user", "-signups.event", )
+    serialize_rules = ("-signups.user", "-favorites.user", "-signups.event","-events.user", )
 
     @validates("name")
     def validate_name(self, key, name):
@@ -59,25 +59,25 @@ class Event(db.Model, SerializerMixin):
     host = db.Column(db.String)
     info = db.Column(db.String)
 
-    # user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
     signups = db.relationship("SignUp", backref = 'event', cascade = "all, delete")
     favorites = db.relationship("Favorite", backref = 'event', cascade = "all, delete")
 
-    serialize_rules = ("-signups.event", "-favorites.event", "-signups.user",)
+    serialize_rules = ("-signups.event", "-favorites.event", "-signups.user","-user.events",)
 
-    # @validates("user_id")
-    # def validate_id(self, key, value):
-    #     if not value or type(value) != int:
-    #         raise ValueError("Not in DataBase")
-    #     if key == "user_id" and User.query.filter_by(id = value).one_or_none() == None:
-    #         raise ValueError("Not in Database")
-    #     return value
-    @validates("time")
-    def validate_age(self, key, time):
-        if not 0 <= time <= 23:
-            raise ValueError("Invalid time")
-        return time
-    @validates("name", "host","location", "date", "info" )
+    @validates("user_id")
+    def validate_id(self, key, value):
+        if not value or type(value) != int:
+            raise ValueError("Not in DataBase")
+        if key == "user_id" and User.query.filter_by(id = value).one_or_none() == None:
+            raise ValueError("Not in Database")
+        return value
+    # @validates("time")
+    # def validate_age(self, key, time):
+    #     if not 0 <= time <= 23:
+    #         raise ValueError("Invalid time")
+    #     return time
+    @validates("name", "host","location", "date", "info", "time" )
     def validate_event(self, key, value):
         if not value or len(value) < 1:
             raise ValueError("Input must be valid")

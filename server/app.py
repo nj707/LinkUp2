@@ -165,7 +165,8 @@ class EventList(Resource):
                 date=data["date"],
                 location=data["location"],
                 host=data["host"],
-                info=data["info"]
+                info=data["info"],
+                user_id=data["user_id"],
             )
             db.session.add(event)
             db.session.commit()
@@ -194,6 +195,20 @@ class EventId(Resource):
         if not event:
             return make_response("Event not found", 404)
         return make_response(event.to_dict(), 200)
+    
+    def patch(self, id):
+        event_hold = Event.query.filter_by(id=id).one_or_none()
+        if not event_hold:
+            return make_response("not found", 404)
+        try:
+            data = request.get_json()
+            for attr in data:
+                setattr(event_hold,attr,data[attr])
+            db.session.add(event_hold)
+            db.session.commit()
+            return make_response(event_hold.to_dict(),202)
+        except:
+            return make_response("Failed to update ",400)
 
 api.add_resource(EventId, "/events/<int:id>")
 

@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 
-function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postSignups, removeSignup }) {
-    const { id, name, time, date, location, host, info } = event;
+function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent }) {
+    const { id, name, time, date, location, host, info, user_id } = event;
     const isUserDefined = currUser && currUser.favorites;
     const isSuDefined = currUser && currUser.signups
     const isEventAdded = isUserDefined && currUser.favorites.some((favorite) => favorite.event_id === id);
@@ -91,6 +91,34 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
         }
     }
 
+    function deleteEvent() {
+        fetch(`/events/${id}`, { method: "DELETE" })
+            .then((response) => {
+                if (response.ok) {
+                    removeEvent(id);
+                }
+            });
+
+    }
+
+    function handleUser() {
+        if (currUser.id === user_id) {
+            return (<button onClick={deleteEvent}>Delete</button>)
+
+        } else {
+            return (
+                <>
+                    <button onClick={handleToggleProfile}>
+                        {isAdded ? "Unfavorite" : "Favorite"}
+                    </button>
+                    <button onClick={handleToggleSignup}>
+                        {isSu ? "Unlist" : "List"}
+                    </button>
+                </>
+            )
+        }
+    }
+
 
 
 
@@ -103,12 +131,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                 <p>About: {info}</p>
                 <p>When? On {date} at {time}</p>
                 <p>Where? {location}</p>
-                <button onClick={handleToggleProfile}>
-                    {isAdded ? "Unfavorite" : "Favorite"}
-                </button>
-                <button onClick={handleToggleSignup}>
-                    {isSu ? "Unlist" : "List"}
-                </button>
+                {handleUser()}
             </li>
         </div>
     );

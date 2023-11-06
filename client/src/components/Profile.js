@@ -3,7 +3,7 @@ import EditUser from './EditUser';
 import EventCard from './EventCard';
 import { useHistory } from "react-router-dom";
 
-function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, postSignups, removeSignup }) {
+function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent, addEvent }) {
     const history = useHistory()
     const [showForm, setShowForm] = useState(false)
 
@@ -22,6 +22,8 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     removeFavorite={removeFavorite}
                     postSignups={postSignups}
                     removeSignup={removeSignup}
+                    removeEvent={removeEvent}
+                    addEvent={addEvent}
                 />)
             } return null
         })
@@ -39,10 +41,32 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     postFavorites={postFavorites}
                     removeFavorite={removeFavorite}
                     postSignups={postSignups}
-                    removeSignup={removeSignup} />)
+                    removeSignup={removeSignup}
+                    removeEvent={removeEvent}
+                    addEvent={addEvent} />)
             } return null
         })
         : null
+
+    const renderMyEvents = currUser.events !== undefined ?
+        currUser.events.map((ev) => {
+            const eventHold = events.filter((event) => event.id === ev.id)
+            if (eventHold.length > 0) {
+                return (<EventCard
+                    key={ev.id}
+                    event={eventHold[0]}
+                    currUser={currUser}
+                    xurl={xurl}
+                    postFavorites={postFavorites}
+                    removeFavorite={removeFavorite}
+                    postSignups={postSignups}
+                    removeSignup={removeSignup}
+                    removeEvent={removeEvent}
+                    addEvent={addEvent} />)
+            } return null
+        })
+        : null
+
 
 
 
@@ -91,6 +115,7 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
 
 
     return (
+
         <>
             {showForm ? <EditUser handleProf={handleProf} currUser={currUser} deleteUser={deleteUser} /> : <> </>}
             <div className="buttonContainer">
@@ -101,6 +126,11 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
             </div>
 
             <div>
+                <header>Welcome {currUser.username}</header>
+                <ul className="cards">
+                    My Events
+                    {renderMyEvents}
+                </ul>
                 <ul className="cards">
                     Favorites
                     {renderFavEvents}

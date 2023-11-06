@@ -34,42 +34,42 @@ with app.app_context():
     print("creating events...")
     event1 = Event(
         name = "Studio Session",
-        time = 9,
+        time = "9 P.M",
         date = "November 10, 2023",
         location = "The Crib",
         host = "Yaboi Nilo",
         info = "Come slide to the studio session and have fun",
-        # user_id= user1.id ,
+        user_id= 1 ,
 
     )
     event2 = Event(
         name = "Astroworld Tour",
-        time = 9,
+        time = "9",
         date = "November 12, 2023",
         location = "Los Angeles at SoFI Stadium",
         host = "Travis Scott",
         info = "Travis Scott Live in Concert",
-        # user_id= user4.id ,
+        user_id= 4 ,
 
     )
     event3 = Event(
         name = "Circus Maximus Tour",
-        time = 7,
+        time = "7",
         date = "October 31, 2023",
         location = "Oakland Arena",
         host = "Live Nation",
         info = "Travis Scott Live in Concert",
-        # user_id= user4.id ,
+        user_id= 4,
 
     )
     event4 = Event(
         name = "Sippin' Sundays",
-        time = 6,
+        time = "6",
         date = "November 13, 2023",
         location = "Vallejo, California",
         host = "Lets Function",
         info = "Yaboi Nilo and Oh3 Live",
-        # user_id= user3.id ,
+        user_id= 3,
 
     )
     events = [event1, event2, event3, event4]

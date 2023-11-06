@@ -56,6 +56,12 @@ function App() {
   }
 
 
+
+
+
+
+
+
   function postFavorites(data) {
     setCurrUser({
       ...currUser,
@@ -77,8 +83,32 @@ function App() {
         })
         setEvents(newEventsList)
       })
+    setUsers(users.map((user) => {
+      if (user.id === currUser.id) {
+        return {
+          ...currUser,
+          favorites: [
+            ...currUser.favorites,
+            data,
+          ],
+        }
+      } else {
+        return user
+      }
+    }))
   }
   function removeFavorite(data) {
+    const newFavs = currUser.favorites.filter((fav) => { fav.id !== data })
+    setUsers(users.map((user) => {
+      if (user.id === currUser.id) {
+        return {
+          ...currUser,
+          favorites: newFavs,
+        }
+      } else {
+        return user
+      }
+    }))
     const updatedCurrUserFavs = currUser.favorites.filter(
       (favorite) => favorite.id !== data
     )
@@ -87,6 +117,15 @@ function App() {
       favorites: updatedCurrUserFavs,
     })
   }
+
+
+
+
+
+
+
+
+
 
   function postSignups(data) {
     setCurrUser({
@@ -109,8 +148,38 @@ function App() {
         })
         setEvents(newEventsList)
       })
+    setUsers(users.map((user) => {
+      if (user.id === currUser.id) {
+        return {
+          ...currUser,
+          signups: [
+            ...currUser.signups,
+            data,
+          ],
+        }
+      } else {
+        return user
+      }
+    }))
   }
+
+
+
+
+
+
   function removeSignup(data) {
+    const newSus = currUser.signups.filter((sup) => { sup.id !== data })
+    setUsers(users.map((user) => {
+      if (user.id === currUser.id) {
+        return {
+          ...currUser,
+          signups: newSus,
+        }
+      } else {
+        return user
+      }
+    }))
     const updatedCurrUserSus = currUser.signups.filter(
       (signup) => signup.id !== data
     )
@@ -120,6 +189,20 @@ function App() {
     })
   }
 
+  function removeEvent(data) {
+    const updatedCurrUserSus = currUser.events.filter(
+      (event) => event.id !== data
+    )
+    const updatedEvents = events.filter(
+      (event) => event.id !== data
+    )
+    setCurrUser({
+      ...currUser,
+      events: updatedCurrUserSus,
+    })
+    setEvents(updatedEvents)
+  }
+
 
   function addUser(data) {
     setUsers([...users, data])
@@ -127,6 +210,14 @@ function App() {
   function removeUser(data) {
     setUsers(users.filter((user) => { if (user.id !== data.id) return user }))
   }
+
+  function addEvent(data) {
+    setEvents([...events, data])
+  }
+  // function (data) {
+  //   setEvents(events.filter((event) => { if (event.id !== data.id) return event }))
+  // }
+
 
 
   return (
@@ -146,7 +237,11 @@ function App() {
             postFavorites={postFavorites}
             removeFavorite={removeFavorite}
             postSignups={postSignups}
-            removeSignup={removeSignup} />
+            removeSignup={removeSignup}
+            removeEvent={removeEvent}
+            setEvents={setEvents}
+            addEvent={addEvent}
+          />
         </Route>
 
         <Route exact path="/login">
@@ -169,7 +264,9 @@ function App() {
             postFavorites={postFavorites}
             removeFavorite={removeFavorite}
             postSignups={postSignups}
-            removeSignup={removeSignup} />
+            removeSignup={removeSignup}
+            removeEvent={removeEvent}
+            addEvent={addEvent} />
 
         </Route>
 

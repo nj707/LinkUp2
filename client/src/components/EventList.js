@@ -1,7 +1,7 @@
 import React from 'react';
 import EventCard from './EventCard';
 
-function EventList({ events, xurl, postFavorites, removeFavorite, currUser, postSignups, removeSignup }) {
+function EventList({ events, xurl, postFavorites, removeFavorite, currUser, postSignups, removeSignup, removeEvent }) {
     const renderEvents = events.map((event) => {
         return <EventCard key={event.id}
             event={event}
@@ -11,6 +11,7 @@ function EventList({ events, xurl, postFavorites, removeFavorite, currUser, post
             currUser={currUser}
             postSignups={postSignups}
             removeSignup={removeSignup}
+            removeEvent={removeEvent}
         />;
     })
 

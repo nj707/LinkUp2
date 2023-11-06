@@ -7,9 +7,14 @@ import { Route, Switch } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 
 
-function EventPage({ events, currUser, xurl, postFavorites, removeFavorite, postSignups, removeSignup }) {
+function EventPage({ events, currUser, xurl, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent, setEvents, addEvent }) {
     const history = useHistory()
+    const [showForm, setShowForm] = useState(false)
 
+
+    function handleClick() {
+        setShowForm((showForm) => !showForm)
+    }
 
 
 
@@ -17,12 +22,15 @@ function EventPage({ events, currUser, xurl, postFavorites, removeFavorite, post
         <main>
             <header>
                 Event Page
-                <button onClick={() => history.push('/create')}>Add Event</button>
-                <Switch>
-                    <Route exact path="/create">
-                        <CreateEvent events={events} currUser={currUser} xurl={xurl} />
-                    </Route>
-                </Switch>
+                {showForm ? <CreateEvent events={events} currUser={currUser} xurl={xurl} setEvents={setEvents} addEvent={addEvent} /> : <> </>}
+                <div className="buttonContainer">
+                    <button onClick={handleClick} className="user-form-submit">A Event</button>
+                </div>
+
+                {/* 
+                <CreateEvent events={events} currUser={currUser} xurl={xurl} setEvents={setEvents} /> */}
+
+
             </header>
             <EventList
                 events={events}
@@ -31,7 +39,8 @@ function EventPage({ events, currUser, xurl, postFavorites, removeFavorite, post
                 removeFavorite={removeFavorite}
                 currUser={currUser}
                 postSignups={postSignups}
-                removeSignup={removeSignup} />
+                removeSignup={removeSignup}
+                removeEvent={removeEvent} />
 
         </main>
     )
