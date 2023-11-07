@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { currUserContext } from "./App";
 
 
-function NavBar({ currUser }) {
+function NavBar() {
+    const userData = useContext(currUserContext)
 
 
-    if (!currUser) {
+    if (!userData) {
         return (
             <div className="nav-container">
                 <p>

@@ -6,9 +6,9 @@ import EventPage from "./EventPage";
 import NavBar from "./NavBar"
 import Profile from "./Profile"
 import HomePage from "./HomePage"
+import { createContext } from "react";
 
-
-
+export const currUserContext = createContext('')
 
 function App() {
   const xurl = "http://127.0.0.1:5555"
@@ -154,7 +154,7 @@ function App() {
 
 
 
-  function removeSignup(data) {
+  function removeSignup(data, event_id) {
     const newSus = currUser.signups.filter((sup) => sup.id !== data);
     setUsers(users.map((user) => {
       if (user.id === currUser.id) {
@@ -164,6 +164,16 @@ function App() {
         }
       } else {
         return user
+      }
+    }));
+    setEvents(events.map((event) => {
+      if (event.id === event_id) {
+        return {
+          ...event,
+          signups: newSus,
+        }
+      } else {
+        return event
       }
     }));
     setCurrUser({
@@ -197,72 +207,69 @@ function App() {
   function addEvent(data) {
     setEvents([...events, data])
   }
-  // function (data) {
-  //   setEvents(events.filter((event) => { if (event.id !== data.id) return event }))
-  // }
+
 
 
 
   return (
-    <div className="app">
+    <currUserContext.Provider value={currUser}>
 
-      <Header />
-      <NavBar currUser={currUser} />
-      <Switch>
-        <Route exact path="/">
-          <HomePage events={events} />
-        </Route>
+      <div className="app">
 
-        <Route exact path="/events">
-          <EventPage currUser={currUser}
-            events={events}
-            xurl={xurl}
-            postFavorites={postFavorites}
-            removeFavorite={removeFavorite}
-            postSignups={postSignups}
-            removeSignup={removeSignup}
-            removeEvent={removeEvent}
-            setEvents={setEvents}
-            addEvent={addEvent}
-            currEvent={currEvent}
-            setCurrentEvent={setCurrentEvent}
-            handleUpdateEvent={handleUpdateEvent}
-          />
-        </Route>
+        <Header />
+        <NavBar />
+        <Switch>
+          <Route exact path="/">
+            <HomePage events={events} />
+          </Route>
 
-        <Route exact path="/login">
-          <Login users={users}
-            currUser={currUser}
-            loggedIn={loggedIn}
-            setLogIn={setLogIn}
-            setCurrentUser={setCurrentUser}
-            xurl={xurl}
-            addUser={addUser} />
-        </Route>
+          <Route exact path="/events">
+            <EventPage currUser={currUser}
+              events={events}
+              xurl={xurl}
+              postFavorites={postFavorites}
+              removeFavorite={removeFavorite}
+              postSignups={postSignups}
+              removeSignup={removeSignup}
+              removeEvent={removeEvent}
+              setEvents={setEvents}
+              addEvent={addEvent}
+              handleUpdateEvent={handleUpdateEvent}
+            />
+          </Route>
 
-        <Route exact path="/profile">
-          <Profile events={events}
-            loggedIn={loggedIn}
-            currUser={currUser}
-            setCurrentUser={setCurrentUser}
-            xurl={xurl}
-            removeUser={removeUser}
-            postFavorites={postFavorites}
-            removeFavorite={removeFavorite}
-            postSignups={postSignups}
-            removeSignup={removeSignup}
-            removeEvent={removeEvent}
-            addEvent={addEvent}
-            currEvent={currEvent}
-            setCurrentEvent={setCurrentEvent}
-            handleUpdateEvent={handleUpdateEvent} />
+          <Route exact path="/login">
+            <Login users={users}
+              currUser={currUser}
+              loggedIn={loggedIn}
+              setLogIn={setLogIn}
+              setCurrentUser={setCurrentUser}
+              xurl={xurl}
+              addUser={addUser} />
+          </Route>
 
-        </Route>
+          <Route exact path="/profile">
+            <Profile events={events}
+              loggedIn={loggedIn}
+              currUser={currUser}
+              setCurrentUser={setCurrentUser}
+              xurl={xurl}
+              removeUser={removeUser}
+              postFavorites={postFavorites}
+              removeFavorite={removeFavorite}
+              postSignups={postSignups}
+              removeSignup={removeSignup}
+              removeEvent={removeEvent}
+              addEvent={addEvent}
+              handleUpdateEvent={handleUpdateEvent} />
 
-      </Switch>
+          </Route>
+
+        </Switch>
 
 
-    </div>
+      </div>
+    </currUserContext.Provider>
   );
 }
 

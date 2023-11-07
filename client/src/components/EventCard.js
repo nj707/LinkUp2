@@ -20,6 +20,10 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
         setIsSu(isSuDefined && currUser.signups.some((signup) => signup.event_id === id))
     }, [currUser])
 
+    useEffect(() => {
+        console.log(event)
+    }, [])
+
 
     function handleToggleProfile() {
         if (id) {
@@ -64,7 +68,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                 fetch(`/signups/${su_hold.id}`, { method: "DELETE" })
                     .then((response) => {
                         if (response.ok) {
-                            removeSignup(su_hold.id);
+                            removeSignup(su_hold.id, id);
                             setIsSu(false);
                         }
                     });
@@ -117,6 +121,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                     }
                     <button onClick={handleClick}>Edit</button>
                     <button onClick={deleteEvent}>Delete</button>
+                    <p> Number of Signups: {event.signups.length}</p>
                 </>
             )
 
@@ -150,6 +155,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                 <p>When? On {date} at {time}</p>
                 <p>Where? {location}</p>
                 {handleUser()}
+
             </li>
         </div>
     );
