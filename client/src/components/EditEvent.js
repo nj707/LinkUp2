@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function EditEvent({ event, handleUpdateEvent, handleClick }) {
+function EditEvent({ event, handleUpdateEvent, handleClick, currUser }) {
     const [formData, setFormData] = useState({
         name: '',
         time: '',
@@ -8,7 +8,7 @@ function EditEvent({ event, handleUpdateEvent, handleClick }) {
         location: '',
         host: '',
         info: '',
-        user_id: '',
+        user_id: currUser.id,
     });
 
     useEffect(() => {
@@ -103,15 +103,7 @@ function EditEvent({ event, handleUpdateEvent, handleClick }) {
                     onChange={handleInputChange}
                 />
             </label>
-            <label>
-                User ID:
-                <input
-                    type="text"
-                    name="user_id"
-                    value={formData.user_id}
-                    onChange={handleInputChange}
-                />
-            </label>
+
             <button type="submit">Update Event</button>
         </form>
     );

@@ -112,7 +112,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                 <>
                     {showForm ?
                         <EditEvent event={event}
-                            handleUpdateEvent={handleUpdateEvent} handleClick={handleClick} /> : <> </>
+                            handleUpdateEvent={handleUpdateEvent} handleClick={handleClick} currUser={currUser} /> : <> </>
 
                     }
                     <button onClick={handleClick}>Edit</button>

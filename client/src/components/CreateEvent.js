@@ -95,13 +95,7 @@ function CreateEvent({ currUser, setEvents, events, addEvent, handleClick }) {
                     onChange={handleChange}
                     value={eventForm.info}
                     className="event-form-input" />
-                <input
-                    type="text"
-                    name="user_id"
-                    placeholder="id"
-                    onChange={handleChange}
-                    value={eventForm.user_id}
-                    className="event-form-input" />
+
 
                 <button type="submit">Create Event</button>
 

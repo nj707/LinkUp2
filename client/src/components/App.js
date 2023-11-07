@@ -13,11 +13,8 @@ import HomePage from "./HomePage"
 function App() {
   const xurl = "http://127.0.0.1:5555"
   const [currUser, setCurrUser] = useState("")
-  const [currEvent, setCurrEvent] = useState("")
   const [events, setEvents] = useState([])
   const [users, setUsers] = useState([])
-  // const [sus, setSus] = useState([])
-  // const [favorites, setFavorites] = useState([])
   const [loggedIn, setLoggedIn] = useState([])
 
 
@@ -37,27 +34,13 @@ function App() {
       .then(setUsers)
   }, [])
 
-  // useEffect(() => {
-  //   fetch(`${xurl}/signups`)
-  //     .then(r => r.json())
-  //     .then(setSus)
-  // }, [])
-
-  // useEffect(() => {
-  //   fetch(`${xurl}/favorites`)
-  //     .then(r => r.json())
-  //     .then(setFavorites)
-  // }, [])
-
   function setLogIn(data) {
     setLoggedIn(data)
   }
   function setCurrentUser(data) {
     setCurrUser(data)
   }
-  function setCurrentEvent(data) {
-    setCurrEvent(data)
-  }
+
 
   const handleUpdateEvent = (updatedEvent) => {
     setEvents(events.map(event => event.id === updatedEvent.id ? updatedEvent : event));
