@@ -150,10 +150,11 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
     return (
         <div>
             <li className="card">
-                <h4>This is {name}. This is an event hosted by {host}</h4>
-                <p>About: {info}</p>
-                <p>When? On {date} at {time}</p>
-                <p>Where? {location}</p>
+                <h4>{name} on {date}</h4>
+                <p>hosted by {host}</p>
+                <p>Location: {location}</p>
+                <p>Time: {time}</p>
+                <p>Info: {info}</p>
                 {handleUser()}
 
             </li>
