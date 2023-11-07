@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 
-function CreateEvent({ currUser, setEvents, events, addEvent }) {
+function CreateEvent({ currUser, setEvents, events, addEvent, handleClick }) {
     const history = useHistory()
     const iV = {
         name: "",
@@ -38,8 +38,9 @@ function CreateEvent({ currUser, setEvents, events, addEvent }) {
 
                         addEvent(data)
                         setEventForm(iV)
+                        handleClick()
                         // setEvents(data)
-                        history.push('/events')
+                        // history.push('/events')
 
                     })
             }
@@ -49,7 +50,7 @@ function CreateEvent({ currUser, setEvents, events, addEvent }) {
 
     return (
         <div className='new-event-form'>
-            Form should be here
+
             <form onSubmit={handleSubmit}>
                 <h2>Create Event</h2>
                 <input

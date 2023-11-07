@@ -13,6 +13,7 @@ import HomePage from "./HomePage"
 function App() {
   const xurl = "http://127.0.0.1:5555"
   const [currUser, setCurrUser] = useState("")
+  const [currEvent, setCurrEvent] = useState("")
   const [events, setEvents] = useState([])
   const [users, setUsers] = useState([])
   // const [sus, setSus] = useState([])
@@ -54,8 +55,13 @@ function App() {
   function setCurrentUser(data) {
     setCurrUser(data)
   }
+  function setCurrentEvent(data) {
+    setCurrEvent(data)
+  }
 
-
+  const handleUpdateEvent = (updatedEvent) => {
+    setEvents(events.map(event => event.id === updatedEvent.id ? updatedEvent : event));
+  };
 
 
 
@@ -235,6 +241,9 @@ function App() {
             removeEvent={removeEvent}
             setEvents={setEvents}
             addEvent={addEvent}
+            currEvent={currEvent}
+            setCurrentEvent={setCurrentEvent}
+            handleUpdateEvent={handleUpdateEvent}
           />
         </Route>
 
@@ -260,7 +269,10 @@ function App() {
             postSignups={postSignups}
             removeSignup={removeSignup}
             removeEvent={removeEvent}
-            addEvent={addEvent} />
+            addEvent={addEvent}
+            currEvent={currEvent}
+            setCurrentEvent={setCurrentEvent}
+            handleUpdateEvent={handleUpdateEvent} />
 
         </Route>
 

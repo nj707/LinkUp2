@@ -3,7 +3,7 @@ import EditUser from './EditUser';
 import EventCard from './EventCard';
 import { useHistory } from "react-router-dom";
 
-function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent, addEvent }) {
+function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent, addEvent, currEvent, handleUpdateEvent }) {
     const history = useHistory()
     const [showForm, setShowForm] = useState(false)
 
@@ -24,6 +24,8 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     removeSignup={removeSignup}
                     removeEvent={removeEvent}
                     addEvent={addEvent}
+                    currEvent={currEvent}
+                    handleUpdateEvent={handleUpdateEvent}
                 />)
             } return null
         })
@@ -43,7 +45,9 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     postSignups={postSignups}
                     removeSignup={removeSignup}
                     removeEvent={removeEvent}
-                    addEvent={addEvent} />)
+                    addEvent={addEvent}
+                    currEvent={currEvent}
+                    handleUpdateEvent={handleUpdateEvent} />)
             } return null
         })
         : null
@@ -62,7 +66,9 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     postSignups={postSignups}
                     removeSignup={removeSignup}
                     removeEvent={removeEvent}
-                    addEvent={addEvent} />)
+                    addEvent={addEvent}
+                    currEvent={currEvent}
+                    handleUpdateEvent={handleUpdateEvent} />)
             } return null
         })
         : null

@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
+import EditEvent from './EditEvent';
 
-function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent }) {
+function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent, handleUpdateEvent }) {
     const { id, name, time, date, location, host, info, user_id } = event;
     const isUserDefined = currUser && currUser.favorites;
     const isSuDefined = currUser && currUser.signups
@@ -9,6 +10,7 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
     const isSuAdded = isSuDefined && currUser.signups.some((signup) => signup.event_id === id)
     const [isAdded, setIsAdded] = useState(isEventAdded);
     const [isSu, setIsSu] = useState(isSuAdded)
+    const [showForm, setShowForm] = useState(false)
 
     useEffect(() => {
         setIsAdded(isUserDefined && currUser.favorites.some((favorite) => favorite.event_id === id))
@@ -100,14 +102,30 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
             });
 
     }
+    function handleClick() {
+        setShowForm((showForm) => !showForm)
+    }
 
     function handleUser() {
         if (currUser.id === user_id) {
-            return (<button onClick={deleteEvent}>Delete</button>)
+            return (
+                <>
+                    {showForm ?
+                        <EditEvent event={event}
+                            handleUpdateEvent={handleUpdateEvent} handleClick={handleClick} /> : <> </>
+
+                    }
+                    <button onClick={handleClick}>Edit</button>
+                    <button onClick={deleteEvent}>Delete</button>
+                </>
+            )
+
+
 
         } else {
             return (
                 <>
+
                     <button onClick={handleToggleProfile}>
                         {isAdded ? "Unfavorite" : "Favorite"}
                     </button>
