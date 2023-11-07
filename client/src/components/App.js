@@ -98,7 +98,7 @@ function App() {
     }))
   }
   function removeFavorite(data) {
-    const newFavs = currUser.favorites.filter((fav) => { fav.id !== data })
+    const newFavs = currUser.favorites.filter((fav) => fav.id !== data);
     setUsers(users.map((user) => {
       if (user.id === currUser.id) {
         return {
@@ -108,14 +108,11 @@ function App() {
       } else {
         return user
       }
-    }))
-    const updatedCurrUserFavs = currUser.favorites.filter(
-      (favorite) => favorite.id !== data
-    )
+    }));
     setCurrUser({
       ...currUser,
-      favorites: updatedCurrUserFavs,
-    })
+      favorites: newFavs,
+    });
   }
 
 
@@ -169,7 +166,7 @@ function App() {
 
 
   function removeSignup(data) {
-    const newSus = currUser.signups.filter((sup) => { sup.id !== data })
+    const newSus = currUser.signups.filter((sup) => sup.id !== data);
     setUsers(users.map((user) => {
       if (user.id === currUser.id) {
         return {
@@ -179,14 +176,11 @@ function App() {
       } else {
         return user
       }
-    }))
-    const updatedCurrUserSus = currUser.signups.filter(
-      (signup) => signup.id !== data
-    )
+    }));
     setCurrUser({
       ...currUser,
-      signups: updatedCurrUserSus,
-    })
+      signups: newSus,
+    });
   }
 
   function removeEvent(data) {
