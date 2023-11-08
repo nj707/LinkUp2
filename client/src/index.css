@@ -12,19 +12,35 @@
   margin: 10px;
   padding: 20px;
   width: 250px;
+  height: 400px;
+
   transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
+
+.cards::before {
+  content: attr(data-title);
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+
+}
+
+
 .card button {
   background-color: #eee;
   color: #333;
-  border: none;
   padding: 10px 20px;
   margin-top: 10px;
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-color: black;
+  cursor: pointer;
+  transition: background-color -0.1s;
 }
 
 .card p {
@@ -52,4 +68,176 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.Profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  /* Increase the font size */
+  /* Add any other styles you want for the profile container here */
+}
+
+.profile-image {
+  width: 200px;
+  /* Increase the size of the circular image */
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-image img {
+  width: 100%;
+  height: auto;
+}
+
+.login-signup-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles for the login form */
+.login-form,
+.signup-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center the form horizontally */
+}
+
+.login-label,
+.signup-label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.login-input,
+.signup-input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.login-submit,
+.signup-submit {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-submit:hover,
+.signup-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Button toggle styles */
+.login-toggle,
+.signup-toggle {
+  background: none;
+
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  border-color: black;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-form-submit {
+  background-color: #007bff;
+  color: white;
+  border-color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.user-form-delete {
+  background-color: #ff0d00;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-color: black;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+}
+
+.user-form-submit:hover {
+  background-color: #0056b3;
+}
+
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+
+
+
+.nav-link {
+  background-color: #007bff;
+  color: white;
+  border-color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #0056b3;
+}
+
+header {
+  /* background: linear-gradient(135deg, #007bff, #007bff); */
+  padding: 20px 0;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  color: #007bff;
+  margin: 0;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }

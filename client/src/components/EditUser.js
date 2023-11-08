@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function EditUser({ handleProf, currUser, deleteUser }) {
+function EditUser({ handleProf, currUser, deleteUser, handleClick }) {
     const iV = {
         name: currUser.name,
         username: currUser.username,
@@ -19,93 +19,85 @@ function EditUser({ handleProf, currUser, deleteUser }) {
         e.preventDefault();
         const updateUser = {
             ...userForm,
-            image: photoUrl
+            image: photoUrl || userForm.image
         }
         handleProf(updateUser)
-
+        handleClick()
     }
     function handleImage(e) {
-        const formData = new FormData()
-        formData.append('file', e.target.files[0])
-        formData.append('upload_preset', 'rv4caj0t')
-        formData.append('api_key', '553477135538917')
+        if (e.target.files[0]) {
+            const formData = new FormData()
+            formData.append('file', e.target.files[0])
+            formData.append('upload_preset', 'rv4caj0t')
+            formData.append('api_key', '553477135538917')
 
-        fetch('https://api.cloudinary.com/v1_1/dvzwroul1/image/upload', {
-            method: 'POST',
-            body: formData,
-        }).then((r) => {
-            if (r.ok) {
-                r.json()
-                    .then(data => {
-                        setPhotoUrl(data.url)
-
-
-                    })
-            }
-        })
+            fetch('https://api.cloudinary.com/v1_1/dvzwroul1/image/upload', {
+                method: 'POST',
+                body: formData,
+            }).then((r) => {
+                if (r.ok) {
+                    r.json()
+                        .then(data => {
+                            setPhotoUrl(data.url)
+                        })
+                }
+            })
+        }
     }
 
-
-
-
-
     return (
-        <div className="user-form">
-            <form onSubmit={handleSubmit} className="update-user-form">
+        <div className="user-form-container">
+            <form onSubmit={handleSubmit} className="login-form">
                 <h3>Update Profile</h3>
-                <label className="signup-label">image:</label>
+                <label className="login-label">Image:</label>
                 <input
-                    type="file" onChange={handleImage}
-
+                    type="file"
+                    onChange={handleImage}
+                    className="login-input"
                 />
-                <br />
-                <label className="signup-label">Name:</label>
+
+                <label className="login-label">Name:</label>
                 <input
                     type="text"
                     name="name"
                     onChange={handleOnChange}
                     value={userForm.name}
-                    className="user-form-input"
+                    className="login-input"
                 />
-                <br />
-                <label className="signup-label">Username:</label>
+
+                <label className="login-label">Username:</label>
                 <input
                     type="text"
                     name="username"
                     onChange={handleOnChange}
                     value={userForm.username}
-                    className="user-form-input"
+                    className="login-input"
                 />
-                <br />
-                <label className="signup-label">Password:</label>
+
+                <label className="login-label">Password:</label>
                 <input
                     type="text"
                     name="password"
                     onChange={handleOnChange}
                     value={userForm.password}
-                    className="user-form-input"
+                    className="login-input"
                 />
-                <br />
-                <label className="signup-label">Profession:</label>
+
+                <label className="login-label">Profession:</label>
                 <input
                     type="text"
                     name="profession"
                     onChange={handleOnChange}
                     value={userForm.profession}
-                    className="user-form-input"
+                    className="login-input"
                 />
-                <br />
 
-
-                <button type="submit" className="user-form-submit">
-                    Submit
-                </button>
+                <button type="submit" className="user-form-submit">Submit</button>
             </form>
 
-            <button onClick={deleteUser} className="user-form-delete">
-                Delete Account
-            </button>
+            <button onClick={deleteUser} className="user-form-delete">Delete Account</button>
         </div>
+
     )
 }
 

@@ -51,60 +51,61 @@ function CreateEvent({ currUser, setEvents, events, addEvent, handleClick }) {
     return (
         <div className='new-event-form'>
 
-            <form onSubmit={handleSubmit}>
-                <h2>Create Event</h2>
+            <form onSubmit={handleSubmit} className="login-form">
+                <h2 className="login-label">Create Event</h2>
                 <input
                     type="text"
                     name="name"
                     placeholder="Event Name"
                     onChange={handleChange}
                     value={eventForm.name}
-                    className="event-form-input" />
+                    className="login-input"
+                />
                 <input
                     type="text"
                     name="time"
                     placeholder="Event Time"
                     onChange={handleChange}
                     value={eventForm.time}
-                    className="event-form-input" />
+                    className="login-input"
+                />
                 <input
                     type="text"
                     name="date"
                     placeholder="Event Date"
                     onChange={handleChange}
                     value={eventForm.date}
-                    className="event-form-input" />
+                    className="login-input"
+                />
                 <input
                     type="text"
                     name="location"
                     placeholder="Event Location"
                     onChange={handleChange}
                     value={eventForm.location}
-                    className="event-form-input" />
+                    className="login-input"
+                />
                 <input
                     type="text"
                     name="host"
                     placeholder="Event Host"
                     onChange={handleChange}
                     value={eventForm.host}
-                    className="event-form-input" />
-                <input
-                    type="text"
+                    className="login-input"
+                />
+                <textarea
                     name="info"
                     placeholder="Event Details"
                     onChange={handleChange}
                     value={eventForm.info}
-                    className="event-form-input" />
+                    className="login-input"
+                    style={{ height: '100px' }} // Adjust the height as needed
+                />
 
-
-                <button type="submit">Create Event</button>
-
-
+                <button type="submit" className="user-form-submit">Create Event</button>
             </form>
-
-
-
         </div>
+
     )
 }
 

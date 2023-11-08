@@ -49,64 +49,64 @@ function EditEvent({ event, handleUpdateEvent, handleClick, currUser }) {
 
     return (
         <form className="user-form-container" onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Time:
-                <input
-                    type="text"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Date:
-                <input
-                    type="text"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Location:
-                <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Host:
-                <input
-                    type="text"
-                    name="host"
-                    value={formData.host}
-                    onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Description:
-                <input
-                    type="text"
-                    name="info"
-                    value={formData.info}
-                    onChange={handleInputChange}
-                />
-            </label>
+            <label className="login-label">Name:</label>
+            <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="login-input"
+            />
 
-            <button type="submit">Update Event</button>
+            <label className="login-label">Time:</label>
+            <input
+                type="text"
+                name="time"
+                value={formData.time}
+                onChange={handleInputChange}
+                className="login-input"
+            />
+
+            <label className="login-label">Date:</label>
+            <input
+                type="text"
+                name="date"
+                value={formData.date}
+                onChange={handleInputChange}
+                className="login-input"
+            />
+
+            <label className="login-label">Location:</label>
+            <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleInputChange}
+                className="login-input"
+            />
+
+            <label className="login-label">Host:</label>
+            <input
+                type="text"
+                name="host"
+                value={formData.host}
+                onChange={handleInputChange}
+                className="login-input"
+            />
+
+            <label className="login-label">Description:</label>
+            <textarea
+                name="info"
+                value={formData.info}
+                onChange={handleInputChange}
+                className="login-input"
+                style={{ height: '100px' }} // Adjust the height as needed
+            />
+
+            <button type="submit" className="user-form-submit">Update Event</button>
         </form>
     );
+
 }
 
 export default EditEvent;

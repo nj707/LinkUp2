@@ -20,8 +20,7 @@ function EventPage({ events, currUser, xurl, postFavorites, removeFavorite, post
 
     return (
         <main>
-            <header>
-                Event Page
+            <h1>
                 {showForm ? <CreateEvent events={events} currUser={currUser} xurl={xurl} setEvents={setEvents} addEvent={addEvent} handleClick={handleClick} /> : <> </>}
                 <div className="buttonContainer">
                     <button onClick={handleClick} className="user-form-submit">Add Event</button>
@@ -31,7 +30,7 @@ function EventPage({ events, currUser, xurl, postFavorites, removeFavorite, post
 
 
 
-            </header>
+            </h1>
             <EventList
                 events={events}
                 xurl={xurl}

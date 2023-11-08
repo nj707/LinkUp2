@@ -5,9 +5,7 @@ function Header() {
         <header>
             <h1>
                 LinkUp
-                <span className="Logo" role="img">
-                    🤞🏽
-                </span>
+
             </h1>
         </header>
     )

@@ -12,6 +12,8 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
     const [isSu, setIsSu] = useState(isSuAdded)
     const [showForm, setShowForm] = useState(false)
 
+    const [displayedUser, setDisplayedUser] = useState(null);
+
     useEffect(() => {
         setIsAdded(isUserDefined && currUser.favorites.some((favorite) => favorite.event_id === id))
     }, [currUser])
@@ -110,42 +112,39 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
         setShowForm((showForm) => !showForm)
     }
 
+
+    function handleShowUser() {
+        setDisplayedUser(displayedUser ? null : event.user);
+    }
+
     function handleUser() {
         if (currUser.id === user_id) {
             return (
                 <>
                     {showForm ?
-                        <EditEvent event={event}
-                            handleUpdateEvent={handleUpdateEvent} handleClick={handleClick} currUser={currUser} /> : <> </>
-
+                        <EditEvent event={event} handleUpdateEvent={handleUpdateEvent} handleClick={handleClick} currUser={currUser} /> : <> </>
                     }
                     <button onClick={handleClick}>Edit</button>
                     <button onClick={deleteEvent}>Delete</button>
                     <p> Number of Signups: {event.signups.length}</p>
                 </>
-            )
-
-
-
+            );
         } else {
             return (
                 <>
-
                     <button onClick={handleToggleProfile}>
                         {isAdded ? "Unfavorite" : "Favorite"}
                     </button>
                     <button onClick={handleToggleSignup}>
                         {isSu ? "Unlist" : "List"}
                     </button>
+                    {currUser.id !== user_id && (
+                        <button onClick={handleShowUser}>Show User</button>
+                    )}
                 </>
-            )
+            );
         }
     }
-
-
-
-
-
 
     return (
         <div>
@@ -156,8 +155,16 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
                 <p>Time: {time}</p>
                 <p>Info: {info}</p>
                 {handleUser()}
-
             </li>
+
+            {displayedUser && (
+                <div className="user-display">
+                    <h2>{displayedUser.name}</h2>
+                    <div className="profile-image">
+                        <img src={displayedUser.image} alt={displayedUser.name} />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

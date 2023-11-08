@@ -3,7 +3,7 @@ import EditUser from './EditUser';
 import EventCard from './EventCard';
 import { useHistory } from "react-router-dom";
 
-function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent, addEvent, handleUpdateEvent }) {
+function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavorites, removeFavorite, postSignups, removeSignup, removeEvent, addEvent, handleUpdateEvent, setEvents }) {
     const history = useHistory()
     const [showForm, setShowForm] = useState(false)
 
@@ -92,6 +92,8 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                         ...updProf, favorites: currUser.favorites, signups: currUser.signups, id: currUser.id
                     }
                     setCurrentUser(updatedUser)
+                    setEvents(events.map(event => event.userId === updatedUser.id ? { ...event, user: updatedUser } : event));
+                    console.log(updatedUser)
                 }
             })
     }
@@ -120,32 +122,34 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
     return (
 
         <>
-            {showForm ? <EditUser handleProf={handleProf} currUser={currUser} deleteUser={deleteUser} /> : <> </>}
-            <div className="buttonContainer">
-                <button onClick={handleClick} className="user-form-submit">User Settings</button>
-            </div>
-            <div className="buttonContainer">
-                <button onClick={handleSignout} className="user-form-submit">Sign out</button>
-            </div>
+
 
             <div>
-                <header>Welcome {currUser.username} </header>
-                <img src={currUser.image} />
-                <ul className="cards">
-                    My Events
+                <div className="Profile">
+                    <h1>{currUser.username} </h1>
+                    <div className="profile-image">
+                        <img src={currUser.image} />
+
+                    </div>
+                </div>
+                <ul className="cards horizontal" data-title="My Events">
                     {renderMyEvents}
                 </ul>
-                <ul className="cards">
-                    Favorites
+                <ul className="cards horizontal" data-title="Favorites">
                     {renderFavEvents}
                 </ul>
-
-                <ul className="cards">
-                    Signups
+                <ul className="cards horizontal" data-title="Signups">
                     {renderSuEvents}
                 </ul>
 
+                <div className="button-Container-SO">
+                    <button onClick={handleSignout} className="user-form-delete">Sign out</button>
+                </div>
 
+                {showForm ? <EditUser handleProf={handleProf} currUser={currUser} deleteUser={deleteUser} handleClick={handleClick} /> : <> </>}
+                <div className="buttonContainer">
+                    <button onClick={handleClick} className="user-form-submit">User Settings</button>
+                </div>
             </div>
         </>
     )

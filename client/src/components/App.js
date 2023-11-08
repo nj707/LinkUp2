@@ -46,6 +46,8 @@ function App() {
     setEvents(events.map(event => event.id === updatedEvent.id ? updatedEvent : event));
   };
 
+  // const handleUpdateChange = (u)
+
 
 
 
@@ -264,7 +266,8 @@ function App() {
               removeSignup={removeSignup}
               removeEvent={removeEvent}
               addEvent={addEvent}
-              handleUpdateEvent={handleUpdateEvent} />
+              handleUpdateEvent={handleUpdateEvent}
+              setEvents={setEvents} />
 
           </Route>
 
