@@ -20,9 +20,9 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
         setIsSu(isSuDefined && currUser.signups.some((signup) => signup.event_id === id))
     }, [currUser])
 
-    useEffect(() => {
-        console.log(event)
-    }, [])
+    // useEffect(() => {
+    //     console.log(event)
+    // }, [])
 
 
     function handleToggleProfile() {

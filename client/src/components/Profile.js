@@ -129,7 +129,8 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
             </div>
 
             <div>
-                <header>Welcome {currUser.username}</header>
+                <header>Welcome {currUser.username} </header>
+                <img src={currUser.image} />
                 <ul className="cards">
                     My Events
                     {renderMyEvents}

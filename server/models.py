@@ -15,6 +15,7 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String)
     password = db.Column(db.String)
     profession = db.Column(db.String)
+    image = db.Column(db.String)
 
     signups = db.relationship("SignUp", backref = 'user', cascade = "all, delete")
     favorites = db.relationship("Favorite", backref = 'user', cascade = "all, delete")
@@ -72,11 +73,7 @@ class Event(db.Model, SerializerMixin):
         if key == "user_id" and User.query.filter_by(id = value).one_or_none() == None:
             raise ValueError("Not in Database")
         return value
-    # @validates("time")
-    # def validate_age(self, key, time):
-    #     if not 0 <= time <= 23:
-    #         raise ValueError("Invalid time")
-    #     return time
+    
     @validates("name", "host","location", "date", "info", "time" )
     def validate_event(self, key, value):
         if not value or len(value) < 1:

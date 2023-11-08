@@ -6,8 +6,10 @@ function EditUser({ handleProf, currUser, deleteUser }) {
         username: currUser.username,
         password: currUser.password,
         profession: currUser.profession,
+        // image: currUser.image,
     }
     const [userForm, setUserForm] = useState(iV)
+    const [photoUrl, setPhotoUrl] = useState('')
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -15,8 +17,35 @@ function EditUser({ handleProf, currUser, deleteUser }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleProf(userForm)
+        const updateUser = {
+            ...userForm,
+            image: photoUrl
+        }
+        handleProf(updateUser)
+
     }
+    function handleImage(e) {
+        const formData = new FormData()
+        formData.append('file', e.target.files[0])
+        formData.append('upload_preset', 'rv4caj0t')
+        formData.append('api_key', '553477135538917')
+
+        fetch('https://api.cloudinary.com/v1_1/dvzwroul1/image/upload', {
+            method: 'POST',
+            body: formData,
+        }).then((r) => {
+            if (r.ok) {
+                r.json()
+                    .then(data => {
+                        setPhotoUrl(data.url)
+
+
+                    })
+            }
+        })
+    }
+
+
 
 
 
@@ -24,6 +53,12 @@ function EditUser({ handleProf, currUser, deleteUser }) {
         <div className="user-form">
             <form onSubmit={handleSubmit} className="update-user-form">
                 <h3>Update Profile</h3>
+                <label className="signup-label">image:</label>
+                <input
+                    type="file" onChange={handleImage}
+
+                />
+                <br />
                 <label className="signup-label">Name:</label>
                 <input
                     type="text"
@@ -60,6 +95,8 @@ function EditUser({ handleProf, currUser, deleteUser }) {
                     className="user-form-input"
                 />
                 <br />
+
+
                 <button type="submit" className="user-form-submit">
                     Submit
                 </button>
@@ -71,5 +108,6 @@ function EditUser({ handleProf, currUser, deleteUser }) {
         </div>
     )
 }
+
 
 export default EditUser;

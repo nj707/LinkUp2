@@ -48,7 +48,7 @@ function EditEvent({ event, handleUpdateEvent, handleClick, currUser }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="user-form-container" onSubmit={handleSubmit}>
             <label>
                 Name:
                 <input
