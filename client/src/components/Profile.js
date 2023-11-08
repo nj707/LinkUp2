@@ -91,9 +91,9 @@ function Profile({ xurl, setCurrentUser, currUser, removeUser, events, postFavor
                     const updatedUser = {
                         ...updProf, favorites: currUser.favorites, signups: currUser.signups, id: currUser.id
                     }
-                    setCurrentUser(updatedUser)
                     setEvents(events.map(event => event.userId === updatedUser.id ? { ...event, user: updatedUser } : event));
-                    console.log(updatedUser)
+                    setCurrentUser(updatedUser)
+
                 }
             })
     }

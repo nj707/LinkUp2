@@ -22,9 +22,9 @@ with app.app_context():
     Favorite.query.delete()
 
     print("creating users...")
-    user1 = User(name="Nial Johnson", username="yaboinilo", profession="Musician", password="1234hi")
+    user1 = User(name="Nial Johnson", username="yaboinilo", profession="Musician", password="1234hi", image="http://res.cloudinary.com/dvzwroul1/image/upload/v1699454964/hutablkaypklrdjd49qu.jpg")
     user2 = User(name = "Will Bargemann", username="chillitswill", profession="Videographer", password="cwilly")
-    user3 = User(name="Henick Baptiste", username="oh3", profession= "Musician, Videographer", password="ooo3")
+    user3 = User(name="Henick Baptiste", username="oh3", profession= "Musician, Videographer", password="ooo3", image="https://res.cloudinary.com/dvzwroul1/image/upload/v1699456097/hsapgcqm0vtmybb3hb5y.jpg")
     user4 = User(name="Travis Scott", username="travis", profession="Musician, Producer", password="astro")
     users = [user1, user2, user3, user4] 
  
@@ -38,18 +38,18 @@ with app.app_context():
         date = "November 10, 2023",
         location = "The Crib",
         host = "Yaboi Nilo",
-        info = "Come slide to the studio session and have fun",
+        info = "Come slide to the studio session and let's make something dope",
         user_id= 1 ,
 
     )
     event2 = Event(
-        name = "Astroworld Tour",
-        time = "9",
+        name = "Sacramento Photo Session",
+        time = "Around 11 in the morning",
         date = "November 12, 2023",
-        location = "Los Angeles at SoFI Stadium",
-        host = "Travis Scott",
-        info = "Travis Scott Live in Concert",
-        user_id= 4 ,
+        location = "Sacrament State University",
+        host = "William Bargemann",
+        info = "I just need models. Show up in your Sac State gear!",
+        user_id= 2 ,
 
     )
     event3 = Event(

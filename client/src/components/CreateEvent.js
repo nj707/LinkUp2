@@ -38,9 +38,12 @@ function CreateEvent({ currUser, setEvents, events, addEvent, handleClick }) {
 
                         addEvent(data)
                         setEventForm(iV)
+                        // setCurrentUser({
+                        //     ...currentUser,
+                        //     events: [...currentUser.events, data],
+                        // });
                         handleClick()
-                        // setEvents(data)
-                        // history.push('/events')
+
 
                     })
             }

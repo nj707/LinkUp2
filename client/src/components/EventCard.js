@@ -159,9 +159,9 @@ function EventCard({ event, currUser, xurl, postFavorites, removeFavorite, postS
 
             {displayedUser && (
                 <div className="user-display">
-                    <h2>{displayedUser.name}</h2>
+                    <h2>{displayedUser.username}</h2>
                     <div className="profile-image">
-                        <img src={displayedUser.image} alt={displayedUser.name} />
+                        <img src={displayedUser.image} />
                     </div>
                 </div>
             )}

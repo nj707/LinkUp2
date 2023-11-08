@@ -46,8 +46,6 @@ function App() {
     setEvents(events.map(event => event.id === updatedEvent.id ? updatedEvent : event));
   };
 
-  // const handleUpdateChange = (u)
-
 
 
 
@@ -207,7 +205,15 @@ function App() {
   }
 
   function addEvent(data) {
-    setEvents([...events, data])
+    setEvents([...events, data]);
+
+
+    if (currUser.id === data.user_id) {
+      setCurrUser({
+        ...currUser,
+        events: [...currUser.events, data],
+      });
+    }
   }
 
 
@@ -240,6 +246,7 @@ function App() {
               setEvents={setEvents}
               addEvent={addEvent}
               handleUpdateEvent={handleUpdateEvent}
+
             />
           </Route>
 
